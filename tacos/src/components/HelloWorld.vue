@@ -80,6 +80,9 @@
         </a>
       </li>
     </ul>
+    <h2>
+    	<router-link to="/helloVue">进入vue世界</router-link>
+    </h2>
   </div>
 </template>
 
