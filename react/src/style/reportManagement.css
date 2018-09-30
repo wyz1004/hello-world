@@ -1,0 +1,74 @@
+html body{
+    height:100%;
+}
+.topContent{
+    background: #ffffff;
+    border-radius: 5px;
+    padding:5px;
+    padding-top: 15px;
+    padding-left: 10px;
+    padding-bottom: 20px;
+    height: 100%;
+}
+.ant-table table {
+    width: 98% !important;
+    margin: 0 auto;
+}
+.ant-select{
+    font-size: 12px!important;
+}
+.tableContent{
+    background: #ffffff;
+    border-radius: 5px;
+    height: 100%;
+}
+.tablePart{
+    text-align: center;
+}
+.tablePart td{
+    font-size: 12px!important;
+    text-align: center!important;
+}
+.tablePart tr:nth-child(2n)
+{
+    background: #eeeeee;
+}
+.tablePart th{
+    color: #eeeeee;
+    font-size: 12px!important;
+    text-align: center!important;
+}
+
+.tablePart ul{
+    display: inline-block!important;
+    float: none!important;
+}
+/*brave edit previewReport ------导出按钮*/
+/*div.exportExcel{
+    width: auto;
+    margin-top: 10px;
+}
+div.exportExcel input{
+    float: right;
+    background: #03A9F4;
+    border: none;
+    color: #fff !important;
+    border-radius: 5px;
+    width: 100px;
+    cursor: pointer;
+}
+div.exportExcel input:hover{
+    background: #2196F3;
+}*/
+.ant-modal-body{
+    padding: 0 !important;
+}
+.ant-modal-header{
+    border-bottom: none;
+}
+.ant-form-vertical .ant-form-item{
+    padding-bottom: 8px;
+    width: 46%;
+    display: inline-block;
+    margin: 15px 10px 0 10px ;
+}

@@ -1,0 +1,68 @@
+div.EnergyMonitorModal{
+	width: 500px!important;
+}
+.ant-tabs-nav .ant-tabs-tab{
+	padding: 20px 0;
+	margin: 0 20px;
+	font-weight: 100;
+}
+div.choiceDevices{
+	width: 95%;
+	margin: 0 auto;
+	min-height: 50px;/*
+	background: gray;*/
+	overflow: hidden;
+	position: relative;
+}
+div.choiceExpain{
+	float: left;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 20px;
+	margin-right: 15px;
+}
+div.choiceName{
+	float: left;
+	width: calc(100% - 80px);
+	font-size: 12px;
+	line-height: 18px;
+}
+div.personName{
+	width: 156px;
+	overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+	height: 24px;
+}
+/*点击更多*/
+span.clickMore{
+	/*float: right;*/
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 2;
+}
+.ant-tabs-bar{
+	margin: 0 0 3% 0;
+}
+/*左边仪表盘*/
+div.gaugesLeft{
+	float: left;
+	width: 33%;
+	margin-right: 10px;
+	border-right: 1px solid gray;
+	background: white;
+}
+/*右边能源蒸气监控*/
+div.lineRight{
+	float: right;
+	width: 66%;
+	/*background: pink;*/
+}
+/*能源监控导航栏*/
+ul.monitorsNav{
+	padding-top: 8px;
+}
+ul.monitorsNav>li{
+	padding: 0;
+	margin:0 20px;
+}
+

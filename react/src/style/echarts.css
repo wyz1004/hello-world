@@ -1,0 +1,16 @@
+
+div.lines,div.pies,div.bars,div.monitors,div.gauges{
+	width: 98%;
+	min-height: 500px;
+	height: auto;
+	margin: 0 auto;
+	overflow: hidden;
+}
+/*spaceMonitors*/
+#monitorWrapper{
+	height: auto!important;
+}
+.barChartWrapper{
+	width: 95%;
+	height: 100%;
+}

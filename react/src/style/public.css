@@ -1,0 +1,75 @@
+*{
+	margin: 0;padding: 0;
+	box-sizing: border-box;
+}
+body{
+	background-color: #f0f2f5 !important;
+}
+/*头部样式*/
+div.header{
+	height: 50px;
+}
+div.header,div.ant-layout-header{
+	height: 50px;
+	line-height: 50px;
+	background: #000000 !important;
+}
+div.header,div.ant-layout-header h1{
+	color:#ffffff;
+	text-align: left;
+	font-size: 1.2vw;
+}
+
+
+/*侧边样式*/
+div.ant-layout-has-sider{
+  float: left;
+  width:200px;
+}
+.ant-layout-sider{
+	width: 200px;
+	background: #001529;
+	min-height: 93vh;
+}
+.side .ant-menu{
+	background: #2a2f43;
+	color: #fff;
+}
+.side .ant-menu-submenu > .ant-menu{
+	background-color: rgb(30, 33, 45) !important;
+}
+.side .ant-menu-item > a{
+	color: #fff;
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+	background-color: rgb(77, 82, 105)!important;
+}
+.ant-menu-vertical .ant-menu-item:after, .ant-menu-vertical-left .ant-menu-item:after, .ant-menu-vertical-right .ant-menu-item:after, .ant-menu-inline .ant-menu-item:after{
+	border-right: 3px solid #2a2f43 !important;
+}
+/*content样式*/
+.App div.ant-layout-content{
+  float: right;
+  width: calc(100% - 220px);
+  background: #fff;
+  margin-top: 10px;
+  margin-right: 10px;
+  min-height: 91vh;
+	height: auto;
+}
+div.content{
+	background: #f0f2f5;
+	min-height: 536px;
+	height: calc(100% - 50px);
+	padding:10px;
+}
+
+.index_hf{
+	float: right;
+	text-decoration: none;
+}
+.index_hf img{
+	height: 25px;
+	width: 25px;
+	margin-right: 0;
+}

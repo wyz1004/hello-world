@@ -1,0 +1,34 @@
+.efficiencyReportTitle{
+	height: 60px;
+	padding: 0 15px;
+	overflow: hidden;
+	border-bottom: 1px solid #e8e8e8;
+}
+.efficiencyReportTitle h3{
+	float: left;
+	line-height: 60px;
+	font-weight: 500;
+	margin-bottom: 0;
+}
+.efficiencyReportTitle div.editeExportBtn{
+	float: right;
+	padding:15px 0px;
+}
+table.wrapperTable{
+	width: 540px;
+	min-height: 300px;
+	margin:20px auto;
+	border:1px solid gray;
+}
+table.wrapperTable>tfoot>tr>td:nth-child(2n-1){
+	width: 16%;
+	text-align: right;
+}
+input[name="fname"]{
+	display: none;
+	width: 100%;
+}
+input[name="fname"]+span{
+	display: block;
+	width: 100%;
+}

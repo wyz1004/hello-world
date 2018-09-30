@@ -1,0 +1,54 @@
+.airTable{
+    font-size: 12px;
+    width: 100%;
+    background: #ffffff;
+    margin-bottom: 20px;
+    border: 1px solid #dedede;
+    color: #333333;
+}
+.airTable button{
+    text-align: center;
+    width: 45px;
+    height: 25px;
+    line-height: 25px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: none;
+    background: #63B8FF;
+    color: #ffffff;
+    cursor:pointer;
+}
+.airTable input{
+    padding-left: 5px;
+    width: 50px;
+    display: inline-block;
+    margin-right: 5px;
+    margin-left: 5px;
+    border: 1px solid #63B8FF;
+    border-radius: 2px;
+}
+.airTable tr{
+    height: 35px;
+    /* border: 1px solid #dedede; */
+}
+/* .airTable td:nth-child(2n-1),th:nth-child(2n-1){
+    background: #b2d6eb;
+} */
+.airTable thead tr:nth-child(1){
+    background: #859197;
+}
+.airTable th{
+    text-align: center;
+}
+.airTable td{
+    padding-left: 10px;
+    border-left: #dedede 1px solid;
+}
+.topBtn{
+    background: #EE2C2C!important;
+    cursor: default!important;
+}
+.windSpeed li{
+    height: 25px;
+    line-height: 25px;
+}
