@@ -24,10 +24,22 @@ export default({
          activeIndex: 'water',
       };
    },
+   mounted(){
+   	  let self = this;
+   	  this.hanleRouteChange(self.$route);	
+   },
+   	watch:{
+   		//用watch监测路由变化；；解决的是子路由变化模板（子组件的模板）数据不更新的问题。这里要解决的是子路由跳转父组件不刷新的问
+        $route(now,old) {
+            //console.log(now,old);//now = this.$route
+	   		this.hanleRouteChange(now);
+        }
+    },
     methods: {
        handleSelect:function(key, keyPath) {
        	var self = this;
 //      console.log(key, keyPath);
+		//console.log(this.$route.path);//{name: undefined, meta: {…}, path: "/energyMonitor/gas", hash: "", query: {…}, …}
 		  if(key == "water"){
 		  	this.$router.push({path:"water"})
 		  	this._data.activeIndex = "water";
@@ -36,6 +48,15 @@ export default({
 		  	this._data.activeIndex = "gas";
 		  }
       },
+      //改变默认选中menu的状态。
+      hanleRouteChange(rou){
+      	var pathCon = rou.path;
+   		if(pathCon == "/energyMonitor/gas"){
+   			this.activeIndex = "gas";
+   		}else if(pathCon == "/energyMonitor/water"){
+   			this.activeIndex = "water";
+   		}
+      }
     },
     components:{
     	Water,

@@ -21,6 +21,6 @@ let vm = new Vue({
   components: { App },
   template: '<App/>',
   mounted(){
-  	console.log(this);
+  	//console.log(this);
   }
 })
