@@ -14,54 +14,58 @@
 		  	<el-menu
 		  		:unique-opened=true
 		  		:router=true
-      default-active="1-1"
+      :default-active="defaultActive"
       class="el-menu-vertical-demo"
       @select="handleSelect"
       @open="handleOpen"
       @close="handleClose">
-      <el-submenu index="1">
+      <el-menu-item index="/energyMonitor/water">
+        <i class="el-icon-setting"></i>
+        <span slot="title">能源监控</span>
+      </el-menu-item>
+      <el-submenu index="/1">
         <template slot="title">
           <i class="el-icon-location"></i>
           <span>导航一</span>
         </template>
         <!--<el-menu-item-group>
           <template slot="title">分组一</template>-->
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
+          <el-menu-item index="/1-1">选项1</el-menu-item>
+          <el-menu-item index="/1-2">选项2</el-menu-item>
         <!--</el-menu-item-group>
         <el-menu-item-group title="分组2">-->
-          <el-menu-item index="1-3">选项3</el-menu-item>
+          <el-menu-item index="/1-3">选项3</el-menu-item>
         <!--</el-menu-item-group>-->
-        <el-submenu index="1-4">
+        <el-submenu index="/1-4">
           <template slot="title">选项4</template>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
+          <el-menu-item index="/1-4-1">选项1</el-menu-item>
         </el-submenu>
       </el-submenu>
-      <el-submenu index="2">
+      <el-submenu index="/2">
       <template slot="title">
         <i class="el-icon-menu"></i>
         <span slot="title">导航二</span>
       </template>
-      	<el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
+      	<el-menu-item index="/2-1">选项1</el-menu-item>
+        <el-menu-item index="/2-2">选项2</el-menu-item>
         <!--</el-menu-item-group>
         <el-menu-item-group title="分组2">-->
-        <el-menu-item index="2-3">选项3</el-menu-item>
+        <el-menu-item index="/2-3">选项3</el-menu-item>
       </el-submenu>
-      <el-submenu index="3">
+      <el-submenu index="/3">
       <template slot="title">
         <i class="el-icon-document"></i>
         <span slot="title">导航三</span>
       </template>
-        <el-menu-item index="3-1">选项1</el-menu-item>
-        <el-menu-item index="3-2">选项2</el-menu-item>
+        <el-menu-item index="/3-1">选项1</el-menu-item>
+        <el-menu-item index="/3-2">选项2</el-menu-item>
         <!--</el-menu-item-group>
         <el-menu-item-group title="分组2">-->
-        <el-menu-item index="3-3">选项3</el-menu-item>
+        <el-menu-item index="/3-3">选项3</el-menu-item>
       </el-submenu>
-      <el-menu-item index="4">
+      <el-menu-item index="/anaysis">
         <i class="el-icon-setting"></i>
-        <span slot="title">导航四</span>
+        <span slot="title">能源分析</span>
       </el-menu-item>
     </el-menu>
 		  </el-aside>
@@ -82,18 +86,37 @@ export default {
 		return {
 			title:"中医药能源管理",
 			imgAlt:"返回主页",//如果和上文中的“返回主页”换成imgAlt这个变量名？
+			defaultActive:"1-1",//默认打开侧边栏的哪一项？
 		}
 	},
+	watch:{
+   		//用watch监测路由变化；；解决的是子路由变化模板（子组件的模板）数据不更新的问题。这里要解决的是子路由跳转父组件不刷新的问
+        $route(now,old) {
+            //console.log(now.path,old.path);//now = this.$route
+            this.handleFleshAndChangeRoute(now.path);
+        }
+    },
+  mounted(){
+  	var self = this;
+  		this.handleFleshAndChangeRoute(self.$route.path);
+  },
   methods:{
+  	handleFleshAndChangeRoute(now){
+  		if(now == "/energyMonitor/gas" || now =="/energyMonitor/water"){
+  			this.defaultActive  = "/energyMonitor/water"
+  		}else{
+  			this.defaultActive = now;
+  		}
+  	},
 			handleSelect(key, keyPath) {
-        		console.log(key, keyPath);
+        		//console.log(key, keyPath);
       		},
 			handleOpen(key, keyPath) {
-        		console.log(key, keyPath);
+        		//console.log(key, keyPath);
       		},
-		    handleClose(key, keyPath) {
-		        console.log(key, keyPath);
-		    }
+	    handleClose(key, keyPath) {
+	        //console.log(key, keyPath);
+	    }
 		}
 }
 </script>

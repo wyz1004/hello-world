@@ -1,5 +1,5 @@
 <template>
-	<div class="water">
+	<div id="water">
 		<div class="monitors" id="barChart2"></div>
 	</div>
 </template>
@@ -211,7 +211,7 @@
 			},
 			resizeWorldMapContainer:()=>{
 		        var barChart= document.getElementById('barChart2');
-		        var barChartWrapper = document.getElementsByClassName('water')[0];
+		        var barChartWrapper = document.getElementsByClassName('monitor_content')[0];
 		        var widthWrapper = window.getComputedStyle(barChartWrapper);
 		        // barChart.css("width", width+"px");
 		        barChart.style.width = widthWrapper +"px";
@@ -236,8 +236,8 @@
 	})
 </script>
 
-<style lang="scss">
-	div.water{
+<style lang="scss" scoped>
+	div#water{
 		width: 100%;
 		height: 100%;
 		padding:20px;

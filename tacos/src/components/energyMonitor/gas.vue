@@ -34,7 +34,10 @@
 		    },
 		    resizeWorldMapContainer:()=> {
 		        var barChart= document.getElementById('barChart2');
-		        var barChartWrapper = document.getElementsByClassName('gas')[0];
+		        var barChartWrapper = document.getElementsByClassName('monitor_content')[0];
+		        //在react项目中，barChartWrapper是class名为water的元素。
+		        //在vue项目中，之所以改变为路口入口的父级元素monitor_content，是因为，在每次切换子路由时，window中一直存在monitor_content这个元素；
+		        //相反在vue项目中，只加载当前显示的组件，而water元素只在显示water组件时，才存在，其余情况不存在，所以在window情况下，有时有，有时无，故容易报错。
 		        var widthWrapper = window.getComputedStyle(barChartWrapper);
 		        // barChart.css("width", width+"px");
 		        barChart.style.width = widthWrapper +"px";
@@ -56,7 +59,7 @@
 	})
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	div.gas{
 		width: 100%;
 		height: 100%;
