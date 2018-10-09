@@ -13,7 +13,7 @@
 			window.addEventListener('resize', this.handleresize);
 		},
 		methods:{
-			drawLine:()=>{
+			drawLine(){
 //				console.log(this);//{a: {…}}
 		        // 基于准备好的dom，初始化echarts实例
 		        this.myChart = echarts.init(document.getElementById('barChart2'))
@@ -32,9 +32,9 @@
 		            }]
 		        });
 		    },
-		    resizeWorldMapContainer:()=> {
+		    resizeWorldMapContainer(){
 		        var barChart= document.getElementById('barChart2');
-		        var barChartWrapper = document.getElementsByClassName('monitor_content')[0];
+		        var barChartWrapper = document.getElementsByClassName('gas')[0];
 		        //在react项目中，barChartWrapper是class名为water的元素。
 		        //在vue项目中，之所以改变为路口入口的父级元素monitor_content，是因为，在每次切换子路由时，window中一直存在monitor_content这个元素；
 		        //相反在vue项目中，只加载当前显示的组件，而water元素只在显示water组件时，才存在，其余情况不存在，所以在window情况下，有时有，有时无，故容易报错。
@@ -42,18 +42,17 @@
 		        // barChart.css("width", width+"px");
 		        barChart.style.width = widthWrapper +"px";
 		    },
-		    handleresize:()=> {
-		        this.a.methods.resizeWorldMapContainer();
+		    handleresize(){
+		        this.resizeWorldMapContainer();
 		        this.myChart.resize();
 		    }
 		},
-		beforeDestroy:()=>{
+		beforeDestroy(){
 //			console.log(this);
 			//该声明周期不用箭头函数，this是指VueComponent {_uid: 36, _isVue: true, $options: {…}, _renderProxy: Proxy, _self: VueComponent, …}
 			//该生命周期函数，用箭头函数时，this是指{a: {…}, myChart: ECharts, timer: 7}
 			var self = this;
-	        window.removeEventListener('resize', this.handleresize);
-	        // self.myChart.dispose();
+	        window.removeEventListener('resize', self.handleresize);
 	        self.myChart.clear();
 		}
 	})

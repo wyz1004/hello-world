@@ -1,7 +1,6 @@
 <template>
-	<div class="barChartWrapper bars" >
-	
-		<div class="bars" id="bars"></div>
+	<div class="bars" >
+		<div id="bar"></div>
 	</div>
 </template>
 
@@ -9,22 +8,19 @@
 	import echarts from "echarts";
 export default ({
 	name:"bars",
-	props:["todo","title","legend","tooltipFormatter","xAxisData","yAxisFormat","seriesDataSeconed"],
+	props:["title","legend","tooltipFormatter","xAxisData","yAxisFormat","seriesDataSeconed"],
 	data(){
 		return {
-			msg:"图标"
 		}
 	},
 	mounted(){
 		this.drawEcahrts();
-	},
-	updated(){
-		console.log(this);
+		window.addEventListener('resize', this.handleresize);
 	},
 	methods:{
 		drawEcahrts(){
 			var self = this;
-			this.echartsss = echarts.init(document.getElementById("bars"));
+			this.echartBars = echarts.init(document.getElementById("bar"));
 			var option = {
 			    color:["#5793f3",'#c23531','#2f4554'],
 			    title:{
@@ -75,9 +71,23 @@ export default ({
 			    ],
 			    series : self.seriesDataSeconed
 			};
-			this.echartsss.setOption(option);
- 
-		}
+			this.echartBars.setOption(option);
+		},
+		resizeWorldMapContainer() {
+			var barChart= document.getElementById('bar');
+	        var barChartWrapper = document.getElementsByClassName('bars')[0];
+	        var widthWrapper = window.getComputedStyle(barChartWrapper);
+	        // barChart.css("width", width+"px");
+	        barChart.style.width = widthWrapper +"px";
+		},
+		handleresize(){
+	        this.resizeWorldMapContainer();
+	        this.echartBars.resize();
+	    }
+	},
+	beforeDestroy(){
+		var self = this;
+		window.removeEventListener("resize",self.handleresize);
 	}
 	
 })
@@ -85,7 +95,12 @@ export default ({
 
 <style lang="scss" scoped>
 div.bars{
-	width: 100%;
-	height: 300px;
-}
+		width: 100%;
+		height: 100%;
+		div#bar{
+			width: 100%;
+			min-height: 80%;
+			height: 100%;
+		}
+	}
 </style>

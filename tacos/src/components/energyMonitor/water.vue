@@ -1,5 +1,5 @@
 <template>
-	<div id="water">
+	<div class="water">
 		<div class="monitors" id="barChart2"></div>
 	</div>
 </template>
@@ -21,14 +21,32 @@
 			this.getDatas();
 			window.addEventListener('resize', this.handleresize);
 		},
-		computed:{
+		methods:{
 			/*handleclick(){
-				console.log("handleclick",this);//VueComponent {_uid: 35, _isVue: true, $options: {…}, _renderProxy: Proxy, _self: VueComponent, …}
+				console.log("handleclick",this);//没有箭头函数时，this是指：VueComponent {_uid: 35, _isVue: true, $options: {…}, _renderProxy: Proxy, _self: VueComponent, …}
 			},*/
+			//获取后台数据 
+			getDatas(){
+				var self = this;
+				console.log(this);
+				function getHistoryData(){
+					return axios.get("/static/mockData/oneHoursData.json");
+				}
+				function getMonitorData(){
+					return axios.get("/static/mockData/monitor.json");
+				}
+				axios.all([getMonitorData(),getHistoryData()]).then(
+					axios.spread(function(monitors,histories){
+//						console.log(self);
+						//console.log(monitors.data,histories.data,self);
+						self.handleMonitorData(monitors.data,histories.data);
+					})
+				)
+			},
 			//处理和合并数组
-			handleMonitorData:(monitorsData,historiesData)=>{
+			handleMonitorData(monitorsData,historiesData){
 				var self = this;//{a: {…}, myChart: ECharts, timer: 3}
-				console.log(monitorsData,historiesData);
+				//console.log(monitorsData,historiesData);
 				var requestDatas,plainOptionLs=[],checkedList=[],seriesDataSeconedThird=[],td=0;
 				var lastObject = [];
 				var now = new Date().toLocaleString().replace(/^\D*/,'');
@@ -38,8 +56,7 @@
 					requestTimeArrs[i] = new Date(historiesData[0][i]*1000).toLocaleString().replace(/^\D*/,'');
 				}
 				requestTimeArrs.push(now);
-		
-				// console.log(historiesData,now);
+				
 				monitorsData.forEach((requestData,index,monitorsData)=>{
 						plainOptionLs.push({
 							name:requestData.metric,
@@ -77,8 +94,7 @@
 				            })()
 						})
 					})
-//					console.log(this);
-					this.a.computed.handleEcharts(seriesDataSeconedThird,plainOptionLs,requestTimeArrs);
+					this.handleEcharts(seriesDataSeconedThird,plainOptionLs,requestTimeArrs);
 				      /*this.setState({
 				      	plainOptionLs,
 				      	seriesDataSeconedThird,
@@ -87,7 +103,7 @@
 				      })*/
 			},
 			//echarts
-			handleEcharts:(seriesDataSeconedThird,plainOptionLs,xAxisData)=>{
+			handleEcharts(seriesDataSeconedThird,plainOptionLs,xAxisData){
 				var self = this;//{a: {…}, myChart: ECharts, timer: 3}
 				var barChart2 = document.getElementById("barChart2");
 				this.myChart = echarts.init(barChart2);
@@ -184,51 +200,30 @@
 				      console.log(err);
 				    })
 				}, 15000);
-//				console.log(self);//{a: {…}, myChart: ECharts, timer: 3}
 				self.myChart.setOption(option);
 				
-			}
-		},
-		methods:{
-			/*handleclick(){
-				console.log("handleclick",this);//没有箭头函数时，this是指：VueComponent {_uid: 35, _isVue: true, $options: {…}, _renderProxy: Proxy, _self: VueComponent, …}
-			},*/
-			//获取后台数据 
-			getDatas:()=>{
-				var self = this;
-				function getHistoryData(){
-					return axios.get("/static/mockData/oneHoursData.json");
-				}
-				function getMonitorData(){
-					return axios.get("/static/mockData/monitor.json");
-				}
-				axios.all([getMonitorData(),getHistoryData()]).then(
-					axios.spread(function(monitors,histories){
-//						console.log(self);
-						self.a.computed.handleMonitorData(monitors.data,histories.data);
-					})
-				)
 			},
-			resizeWorldMapContainer:()=>{
+			resizeWorldMapContainer(){
 		        var barChart= document.getElementById('barChart2');
-		        var barChartWrapper = document.getElementsByClassName('monitor_content')[0];
+		        var barChartWrapper = document.getElementsByClassName('water')[0];
 		        var widthWrapper = window.getComputedStyle(barChartWrapper);
 		        // barChart.css("width", width+"px");
 		        barChart.style.width = widthWrapper +"px";
 		   },
-		    handleresize:()=>{
-//		    	console.log(this);//{a: {…}, myChart: ECharts, timer: 3}
-		        this.a.methods.resizeWorldMapContainer();
+		    handleresize(){
+		    	//console.log(this);
+		        this.resizeWorldMapContainer();
 		        this.myChart.resize();
 		    }
 			
 		},
-		beforeDestroy:()=>{
+		beforeDestroy(){
 //			console.log(this);
 			//该声明周期不用箭头函数，this是指VueComponent {_uid: 36, _isVue: true, $options: {…}, _renderProxy: Proxy, _self: VueComponent, …}
 			//该生命周期函数，用箭头函数时，this是指{a: {…}, myChart: ECharts, timer: 7}
 			var self = this;
 			window.clearInterval(self.timer);
+			//console.log(this);
 	        window.removeEventListener('resize', this.handleresize);
 	        // self.myChart.dispose();
 	        self.myChart.clear();
@@ -237,7 +232,7 @@
 </script>
 
 <style lang="scss" scoped>
-	div#water{
+	div.water{
 		width: 100%;
 		height: 100%;
 		padding:20px;

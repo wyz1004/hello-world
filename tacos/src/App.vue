@@ -23,6 +23,10 @@
         <i class="el-icon-setting"></i>
         <span slot="title">能源监控</span>
       </el-menu-item>
+      <el-menu-item index="/forecast">
+        <i class="el-icon-setting"></i>
+        <span slot="title">能源预测</span>
+      </el-menu-item>
       <el-submenu index="/1">
         <template slot="title">
           <i class="el-icon-location"></i>
@@ -171,4 +175,14 @@ header.header{
 		}
 	}
 }
+
+/*能源预测中tabs的样式-----问题：使用在自定义组件中使用scoped，elementui的样式改变不了。
+ * 解决办法1:将样式定义到全局中
+ * 解决办法2:使用深度作用选择器----见forecast.vue中的样式
+ * */
+/*div.tabsWrapper{
+		div.el-tabs__header{
+			background:white;
+		}
+	}*/
 </style>

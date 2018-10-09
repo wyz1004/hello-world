@@ -7,7 +7,8 @@ import NewCom from "@/components/newCom";
 import EnergyMonitor from "@/components/energyMonitor/energyMonitor";
 import Water from "@/components/energyMonitor/water";
 import Gas from "@/components/energyMonitor/gas";
-import Anaysis from "@/components/anaysis";
+//import Anaysis from "@/components/anaysis";
+import Forecast from "@/components/forecast";
 
 Vue.use(Router)
 
@@ -41,8 +42,12 @@ export default new Router({
     {
     	path:"/anaysis",
     	name:"Anaysis",
-    	component:Anaysis
+    	component:resolve=>require(["@/components/anaysis"],resolve)
     },
-    
+    {
+    	path:"/forecast",
+    	name:"Forecast",
+    	component:Forecast
+    },
   ]
 })
