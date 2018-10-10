@@ -28,7 +28,7 @@
 			//获取后台数据 
 			getDatas(){
 				var self = this;
-				console.log(this);
+				//console.log(this);
 				function getHistoryData(){
 					return axios.get("/static/mockData/oneHoursData.json");
 				}

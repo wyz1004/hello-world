@@ -15,7 +15,7 @@
 
 <script>
 	import axios from "axios";
-	import Bars from "@/public/bars";
+	import Bars from "@/components/public/bars";
 	
 export default ({
 	name:"anaysis",
@@ -95,11 +95,6 @@ div.anaysis{
 	height: 100%;
 	padding:20px;
 	background: white;
-	div#barChart2{
-		width: 100%;
-		min-height: 80%;
-		height: 100%;
-	}
 }
 div.had{
 	width: 100%;

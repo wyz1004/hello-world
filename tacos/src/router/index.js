@@ -9,13 +9,14 @@ import Water from "@/components/energyMonitor/water";
 import Gas from "@/components/energyMonitor/gas";
 //import Anaysis from "@/components/anaysis";
 import Forecast from "@/components/forecast";
+import FormTry from "@/components/reportManagement/form";
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/anaysis',
       name: 'HelloWorld',
       component: HelloWorld
     },
@@ -40,7 +41,7 @@ export default new Router({
     	]
     },
     {
-    	path:"/anaysis",
+    	path:"/",
     	name:"Anaysis",
     	component:resolve=>require(["@/components/anaysis"],resolve)
     },
@@ -48,6 +49,11 @@ export default new Router({
     	path:"/forecast",
     	name:"Forecast",
     	component:Forecast
+    },
+    {
+    	path:"/form",
+    	name:"FormTry",
+    	component:FormTry
     },
   ]
 })

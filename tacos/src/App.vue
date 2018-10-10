@@ -34,8 +34,8 @@
         </template>
         <!--<el-menu-item-group>
           <template slot="title">分组一</template>-->
-          <el-menu-item index="/1-1">选项1</el-menu-item>
-          <el-menu-item index="/1-2">选项2</el-menu-item>
+          <el-menu-item index="/anaysis">welcome</el-menu-item>
+          <el-menu-item index="/form">form trying</el-menu-item>
         <!--</el-menu-item-group>
         <el-menu-item-group title="分组2">-->
           <el-menu-item index="/1-3">选项3</el-menu-item>
@@ -67,7 +67,7 @@
         <el-menu-item-group title="分组2">-->
         <el-menu-item index="/3-3">选项3</el-menu-item>
       </el-submenu>
-      <el-menu-item index="/anaysis">
+      <el-menu-item index="/">
         <i class="el-icon-setting"></i>
         <span slot="title">能源分析</span>
       </el-menu-item>
@@ -90,7 +90,7 @@ export default {
 		return {
 			title:"中医药能源管理",
 			imgAlt:"返回主页",//如果和上文中的“返回主页”换成imgAlt这个变量名？
-			defaultActive:"1-1",//默认打开侧边栏的哪一项？
+			defaultActive:"/",//默认打开侧边栏的哪一项？
 		}
 	},
 	watch:{
@@ -144,14 +144,65 @@ html,body{
 			section.el-container{
 				height: calc(100% - 50px);
 				aside.el-aside{
+					background: #2a2f43;/*为解决滚动条滚动到最下方时，侧边栏底下（原超出部分）不是白色*/
 					ul.el-menu{
 						height: 100%;
+						background: #2a2f43;
+						/*一级菜单的样式*/
 					}
 				}
 			}
 		}
 	}
+}				
+/*
+li[role="menuitem"]{
+	color: white;/*二级菜单的样式
+	i,i:hover{
+		color: white;/*一级菜单的样式
+	}
+	div,div:hover{
+		color: white;
+		span,span:hover{
+			color: white;
+		}
+	}
+}*/
+ul.el-menu.el-menu-vertical-demo{
+	/*一级菜单*/
+	li.el-menu-item{
+		i{}
+		span{}
+	}
+	/*二级菜单*/
+	li.el-submenu{
+		div.el-submen__title{
+			i{}
+			span{}
+		}
+		ul.el-menu.el-menu--inline{
+			li.el-menu-item{
+				
+			}
+			/*三级菜单*/
+			li.el-submenu{
+				div.el-submenu__title{
+					
+				}
+				ul.el-menu.el-menu--inline{
+					
+				}
+			}
+			
+		}
+	}
 }
+/*li.is-active{
+	width: calc(100% + 1px);
+	background: rgb(77,82,105);
+	border-right: 3px solid #2a2f43;
+}*/
+
 body{
 	background-color: #f0f2f5 !important;
 }
@@ -159,7 +210,7 @@ body{
 header.header{
 	height: 50px!important;
 	line-height: 50px;
-	background: #000000;
+	background: #001529;
 	h1{
 		color: white;
 		text-align: lef;
