@@ -18,7 +18,9 @@
       class="el-menu-vertical-demo"
       @select="handleSelect"
       @open="handleOpen"
-      @close="handleClose">
+      @close="handleClose"
+      background-color="#2a2f43"
+      text-color="#fff">
       <el-menu-item index="/energyMonitor/water">
         <i class="el-icon-setting"></i>
         <span slot="title">能源监控</span>
@@ -144,64 +146,95 @@ html,body{
 			section.el-container{
 				height: calc(100% - 50px);
 				aside.el-aside{
-					background: #2a2f43;/*为解决滚动条滚动到最下方时，侧边栏底下（原超出部分）不是白色*/
+					/*background: #2a2f43;/*为解决滚动条滚动到最下方时，侧边栏底下（原超出部分）不是白色*/
 					ul.el-menu{
 						height: 100%;
-						background: #2a2f43;
-						/*一级菜单的样式*/
 					}
 				}
 			}
 		}
 	}
-}				
-/*
-li[role="menuitem"]{
-	color: white;/*二级菜单的样式
-	i,i:hover{
-		color: white;/*一级菜单的样式
-	}
-	div,div:hover{
-		color: white;
-		span,span:hover{
-			color: white;
-		}
-	}
-}*/
-ul.el-menu.el-menu-vertical-demo{
+}
+ul.el-menu.el-menu-vertical-demo{	
 	/*一级菜单*/
 	li.el-menu-item{
-		i{}
+		i{color: white;}
 		span{}
+	}
+	li.el-menu-item:hover{
+		background-color: #2a2f43!important;
+		i{color:#1890ff;}
+		span{color:#1890ff;}
+	}
+	li.is-active{
+		background-color: rgb(77, 82, 105)!important;
+		color:white;
+		i{}
+	}
+	/*解决选中和鼠标滑过的时候，样式冲突的问题*/
+	li.is-active:hover{
+		background-color: rgb(77, 82, 105)!important;
+		color:white;
+		i{}
 	}
 	/*二级菜单*/
 	li.el-submenu{
-		div.el-submen__title{
-			i{}
+		/*二级菜单的标题栏*/
+		div.el-submenu__title{
+			i{color: white;}
 			span{}
 		}
+		div.el-submenu__title:hover{
+			background: #2a2f43!important;
+			i{color: #1890ff!important;}
+			span{color: #1890ff!important;}
+		}
+		/*二级菜单的子菜单*/
 		ul.el-menu.el-menu--inline{
 			li.el-menu-item{
-				
+				min-width: 100%;/*为了解决，子菜单中右边凸出一块，的样式*/
+				background: rgb(30,33,45)!important;
+			}
+			li.is-active{
+				background-color: rgb(77, 82, 105)!important;
+				color:white;
+				i{}
+			}
+			li.el-menu-item:hover{
+				color:#1890ff!important;
+				i{color:#1890ff!important;}
 			}
 			/*三级菜单*/
 			li.el-submenu{
+				/*三级菜单的标题栏*/
 				div.el-submenu__title{
-					
+					background: rgb(30,33,45)!important;
 				}
+				div.el-submenu__title:hover{
+					color:#1890ff!important;
+					i{color:#1890ff!important;}
+				}
+				/*三级菜单的子菜单*/
 				ul.el-menu.el-menu--inline{
-					
+					li.el-menu-item{
+						background: rgb(25,28,40)!important;
+					}
+					li.is-active{
+						background-color: rgb(77, 82, 105)!important;
+						color:white;
+						i{/*color: #1890ff;*/}
+					}
+					li.el-menu-item:hover{
+						/*color:#1890ff;*/
+					}
 				}
 			}
-			
 		}
+		
 	}
 }
-/*li.is-active{
-	width: calc(100% + 1px);
-	background: rgb(77,82,105);
-	border-right: 3px solid #2a2f43;
-}*/
+	
+
 
 body{
 	background-color: #f0f2f5 !important;
