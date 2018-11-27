@@ -4,13 +4,18 @@ import Vue from 'vue'
 import ElementUI from "element-ui";
 import echarts from "echarts";
 
-import axios from '../node_modules/axios'
+/*import axios from '../node_modules/axios'*/
+import axios from "axios";
 import 'element-ui/lib/theme-chalk/index.css';
 import App from './App'
 import router from './router'
+import store from './store'
+import "@/assets/css/public.css";
+
 
 Vue.use(ElementUI);
 Vue.prototype.$echarts = echarts;
+Vue.prototype.$ajax = axios;
 
 Vue.config.productionTip = false
 
@@ -18,6 +23,7 @@ Vue.config.productionTip = false
 let vm = new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>',
   mounted(){

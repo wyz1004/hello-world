@@ -1,67 +1,240 @@
 <template>
-<div class="gas">
-	<div id="barChart2"></div>
-</div>
+	<div class="gas">
+		<div class="monitors" id="barChart2"></div>
+	</div>
 </template>
 
 <script>
+	import axios from "axios";
 	import echarts from "echarts";
 	export default({
-		name:"Gas",
+		name:"gas",
+		data:function(){
+			return {
+				seriesDataSeconedThird:[],
+		    	plainOptionLs:[],//所有的选项
+		    	td:null,
+			}
+		},
 		mounted(){
-			this.drawLine();
+			//console.log(this);//VueComponent {_uid: 35, _isVue: true, $options: {…}, _renderProxy: Proxy, _self: VueComponent, …}
+			this.getDatas();
 			window.addEventListener('resize', this.handleresize);
 		},
 		methods:{
-			drawLine(){
-//				console.log(this);//{a: {…}}
-		        // 基于准备好的dom，初始化echarts实例
-		        this.myChart = echarts.init(document.getElementById('barChart2'))
-		        // 绘制图表
-		        this.myChart.setOption({
-		            title: { text: '在Vue中使用echarts' },
-		            tooltip: {},
-		            xAxis: {
-		                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-		            },
-		            yAxis: {},
-		            series: [{
-		                name: '销量',
-		                type: 'bar',
-		                data: [5, 20, 36, 10, 10, 20]
-		            }]
-		        });
-		    },
-		    resizeWorldMapContainer(){
+			/*handleclick(){
+				console.log("handleclick",this);//没有箭头函数时，this是指：VueComponent {_uid: 35, _isVue: true, $options: {…}, _renderProxy: Proxy, _self: VueComponent, …}
+			},*/
+			//获取后台数据 
+			getDatas(){
+				var self = this;
+				//console.log(this);
+				function getHistoryData(){
+					return axios.get("/static/mockData/oneHoursData.json");
+				}
+				function getMonitorData(){
+					return axios.get("/static/mockData/monitor.json");
+				}
+				axios.all([getMonitorData(),getHistoryData()]).then(
+					axios.spread(function(monitors,histories){
+//						console.log(self);
+						//console.log(monitors.data,histories.data,self);
+						self.handleMonitorData(monitors.data,histories.data);
+					})
+				)
+			},
+			//处理和合并数组
+			handleMonitorData(monitorsData,historiesData){
+				var self = this;//{a: {…}, myChart: ECharts, timer: 3}
+				//console.log(monitorsData,historiesData);
+				var requestDatas,plainOptionLs=[],checkedList=[],seriesDataSeconedThird=[],td=0;
+				var lastObject = [];
+				var now = new Date().toLocaleString().replace(/^\D*/,'');
+				//x轴转换成由时间戳（秒）转换成本地字符串的形式  2018/6/9 下午9:00:00
+				var requestTimeArrs = [];
+				for(var i = 0,l=historiesData[0].length;i<l;i++){
+					requestTimeArrs[i] = new Date(historiesData[0][i]*1000).toLocaleString().replace(/^\D*/,'');
+				}
+				requestTimeArrs.push(now);
+				
+				monitorsData.forEach((requestData,index,monitorsData)=>{
+						plainOptionLs.push({
+							name:requestData.metric,
+							icon:"rect",
+						});
+						checkedList.push(requestData.metric)
+						if(requestData.value){
+							td ++;
+						}
+						// console.log(td);
+						seriesDataSeconedThird.push({
+							name:requestData.metric,
+				            type:'line',
+				            smooth: true,
+				            symbol: 'circle',
+				            symbolSize: 5,
+				            showSymbol: true,
+				            lineStyle: {
+				                normal: {
+				                    width: 1
+				                }
+				            },
+		                    label: {
+		                        show: true,
+		                        position: 'top',
+		                        textStyle: {
+		                            color: '#000',
+		                            fontSize: 12
+		                        }
+		                    },
+				            data:(function (){
+				            	var resData = historiesData[index+1];
+				            	resData.push(requestData.value);
+				            	return resData;
+				            })()
+						})
+					})
+					this.handleEcharts(seriesDataSeconedThird,plainOptionLs,requestTimeArrs);
+				      /*this.setState({
+				      	plainOptionLs,
+				      	seriesDataSeconedThird,
+				      	td,
+				      	xAxisData:requestTimeArrs,
+				      })*/
+			},
+			//echarts
+			handleEcharts(seriesDataSeconedThird,plainOptionLs,xAxisData){
+				var self = this;//{a: {…}, myChart: ECharts, timer: 3}
+				var barChart2 = document.getElementById("barChart2");
+				this.myChart = echarts.init(barChart2);
+				var option = {
+					 title: {
+				        text: "耗用量监控",
+				        left:"center",
+				        show:false,
+				    },
+				    tooltip: {
+				        trigger: 'axis',
+				        axisPointer: {
+				            type: 'cross',
+				            label: {
+				                backgroundColor: '#283b56'
+				            }
+				        }
+				    },
+				    legend: {
+				        data:plainOptionLs,
+				        formatter:"{name}",
+				    },
+				    dataZoom: [{
+				          show: true,
+				          realtime: true,
+				          start: 96,
+				          end: 100,
+				      }, {
+				          type: 'inside',
+				          realtime: true,
+				          start: 96,
+				          end: 100,
+				      }],
+				    xAxis: [
+				        {
+				            type: 'category',
+				            boundaryGap: true,
+				            axisTick: {
+				                alignWithLabel: true
+				            },
+				            axisLine:{//x轴的颜色
+		                        lineStyle:{
+		                            color:'#2a2f43',
+		                        }
+		                    },
+				            data: xAxisData,
+				        }
+				    ],
+				    yAxis: [
+				        {
+				            type: 'value',
+				            scale: true,
+				            name: "耗用量",
+				            axisLabel: {
+				                formatter: "{value} m³"
+				            },
+				            axisLine:{//y轴的颜色
+		                        lineStyle:{
+		                            color:'#2a2f43',
+		                        }
+		                    },
+		                    splitArea : {show : true},//y轴区域分割
+				        }
+				    ],
+				    series:seriesDataSeconedThird,
+				}
+				var axisData,requestDatas,self =this,key,now,nowTimeout;
+				self.timer = setInterval(function (){
+					now = new Date();
+					nowTimeout = now.getTime();
+					// axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
+					axisData = now.toLocaleString().replace(/^\D*/,'');
+					// console.log(new Date());
+					axios.get("/static/mockData/monitor.json").then((res)=>{
+						requestDatas = res.data;
+						// console.log(new Date());
+						requestDatas.forEach((requestData,index,requestDatas)=>{
+						if(option.series){
+							 var len = option.series[index].data.length;
+							 var last = option.series[index].data[len-1]
+								option.series[index].data.shift();
+								// option.series[index].data.push(requestData.value+1);//真数据
+								option.series[index].data.push(last *1 + 1*1)
+								option.series[index].showSymbol=true;
+		                    option.series[index].symbolSize=5;
+							}
+					});
+						if(option.series){
+							 option.xAxis[0].data.shift();
+				    		option.xAxis[0].data.push(axisData);
+						}
+				    	self.myChart.setOption(option);
+				    }).catch((err)=>{
+				      console.log(err);
+				    })
+				}, 15000);
+				self.myChart.setOption(option);
+				
+			},
+			resizeWorldMapContainer(){
 		        var barChart= document.getElementById('barChart2');
 		        var barChartWrapper = document.getElementsByClassName('gas')[0];
-		        //在react项目中，barChartWrapper是class名为water的元素。
-		        //在vue项目中，之所以改变为路口入口的父级元素monitor_content，是因为，在每次切换子路由时，window中一直存在monitor_content这个元素；
-		        //相反在vue项目中，只加载当前显示的组件，而water元素只在显示water组件时，才存在，其余情况不存在，所以在window情况下，有时有，有时无，故容易报错。
 		        var widthWrapper = window.getComputedStyle(barChartWrapper);
 		        // barChart.css("width", width+"px");
 		        barChart.style.width = widthWrapper +"px";
-		    },
+		   },
 		    handleresize(){
+		    	//console.log(this);
 		        this.resizeWorldMapContainer();
 		        this.myChart.resize();
 		    }
+			
 		},
 		beforeDestroy(){
 //			console.log(this);
 			//该声明周期不用箭头函数，this是指VueComponent {_uid: 36, _isVue: true, $options: {…}, _renderProxy: Proxy, _self: VueComponent, …}
 			//该生命周期函数，用箭头函数时，this是指{a: {…}, myChart: ECharts, timer: 7}
 			var self = this;
-	        window.removeEventListener('resize', self.handleresize);
-	        self.myChart.clear();
+			window.clearInterval(self.timer);
+			//console.log(this);
+	        window.removeEventListener('resize', this.handleresize);
+	        self.myChart.dispose();
+	        //self.myChart.clear();
 		}
 	})
 </script>
 
 <style lang="scss" scoped>
 	div.gas{
-		width: 100%;
-		height: 100%;
+		width: calc(100% - 40px);
+		height: calc(100% - 40px);
 		padding:20px;
 		div#barChart2{
 			width: 100%;

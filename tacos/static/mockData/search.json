@@ -1,0 +1,214 @@
+{
+	"allRecords": [[
+			{
+				"energy": "自来水",
+				"sum": 188.0
+			}
+		],[
+			{
+				"energy": "蒸汽",
+				"sum": 99.0
+			}
+		],[
+			{
+				"energy": "电",
+				"sum": 22.0
+			}
+		],[
+			{
+				"energy": "纯化水",
+				"sum": 33.0
+			}
+		]
+	],
+	"now":["蒸汽量", 0.092999995, "电量", 144.42221, "自来水", 0, "纯化水", 2240],
+	"factorOptions": [
+		{
+			"value": "allFactory",
+			"label": "全部车间"
+		}, {
+			"value": "extractFacotry",
+			"label": "提取车间",
+			"children": [
+				{
+					"value": "allProcess",
+					"label": "全部工艺"
+				}, {
+					"value": "extractProcess",
+					"label": "提取工艺",
+					"children": [
+						{
+							"value": "allDevice",
+							"label": "全部设备"
+						}, {
+							"value": "tankDeviceA",
+							"label": "多功能提取罐R2202A"
+						}, {
+							"value": "tankDeviceB",
+							"label": "多功能提取罐R2202B"
+						}, {
+							"value": "tankDeviceC",
+							"label": "多功能提取罐R2202C"
+						}, {
+							"value": "tankDeviceD",
+							"label": "多功能提取罐R2202D"
+						}, {
+							"value": "storageTankDeviceA",
+							"label": "提取液储罐R2203A"
+						}, {
+							"value": "storageTankDeviceB",
+							"label": "提取液储罐R2203B"
+						}, {
+							"value": "storageTankDeviceC",
+							"label": "提取液储罐R2203C"
+						}, {
+							"value": "storageTankDeviceD",
+							"label": "提取液储罐R2203D"
+						}, {
+							"value": "centrifugateTankDevice",
+							"label": "离心液储罐"
+						}
+					]
+				}, {
+					"value": "incrasseProcess",
+					"label": "浓缩工艺",
+					"children": [
+						{
+							"value": "allDevice",
+							"label": "全部设备"
+						}, {
+							"value": "tankDevice",
+							"label": "浓缩罐"
+						}, {
+							"value": "singleEvaporator",
+							"label": "单效蒸发器"
+						}, {
+							"value": "doubleEvaporator",
+							"label": "双效蒸发器"
+						}, {
+							"value": "TVPevaporator",
+							"label": "TVP蒸发器"
+						}, {
+							"value": "MVPevaporator",
+							"label": "MVP蒸发器"
+						}, {
+							"value": "storageTank",
+							"label": "浓缩液储罐"
+						}
+					]
+				}, {
+					"value": "layerFactory",
+					"label": "层析工艺",
+					"children": [
+						{
+							"value": "allDevice",
+							"label": "全部设备"
+						}, {
+							"value": "layerStorageTank",
+							"label": "层析液储罐"
+						}, {
+							"value": "layerPreStorageTankB",
+							"label": "层析前储罐V1207B"
+						}, {
+							"value": "layerPreStorageTankC",
+							"label": "层析前储罐V1207C"
+						}, {
+							"value": "neutralStorageTank",
+							"label": "中和液储罐"
+						}
+					]
+				}, {
+					"value": "ethanolPrecipitationProcess",
+					"label": "醇沉工艺",
+					"children": [
+						{
+							"value": "allDevice",
+							"label": "全部设备"
+						}, {
+							"value": "ethanolPrecipitationTank",
+							"label": "醇沉罐"
+						}, {
+							"value": "supermatant",
+							"label": "上清液储罐"
+						}, {
+							"value": "ethanolPrecipitationPremix",
+							"label": "醇沉预混罐"
+						}
+					]
+				}, {
+					"value": "ethanolRecoveryProcess",
+					"label": "乙醇回收工艺",
+					"children": [
+						{
+							"value": "allDevice",
+							"label": "全部设备"
+						}, {
+							"value": "lowAlcoholStorageTank",
+							"label": "低醇储罐"
+						}, {
+							"value": "ethanolCentrifugateColumn",
+							"label": "乙醇精馏塔"
+						}, {
+							"value": "highAlcoholSrorageTankA",
+							"label": "高醇储罐A"
+						}, {
+							"value": "highAlcoholSrorageTankB",
+							"label": "高醇储罐B"
+						}, {
+							"value": "alcoholMixTankA",
+							"label": "乙醇调配罐A"
+						}, {
+							"value": "alcoholMixTankB",
+							"label": "乙醇调配罐B"
+						}
+					]
+				}
+			]
+		}, {
+			"value": "preppareFactory",
+			"label": "制剂车间",
+			"children": [
+				{
+					"value": "allProcess",
+					"label": "全部工艺"
+				}, {
+					"value": "dryProcess",
+					"label": "干燥工艺",
+					"children": [
+						{
+							"value": "allDevice",
+							"label": "全部设备"
+						}, {
+							"value": "beltDry",
+							"label": "带式干燥"
+						}, {
+							"value": "sprayDry",
+							"label": "喷雾干燥"
+						}
+					]
+				}, {
+					"value": "preparationProcess",
+					"label": "制剂工艺",
+					"children": [
+						{
+							"value": "allDevice",
+							"label": "全部设备"
+						}, {
+							"value": "tablets",
+							"label": "中药片剂"
+						}, {
+							"value": "capsule",
+							"label": "中药胶囊剂"
+						}, {
+							"value": "pill",
+							"label": "中药丸剂"
+						}, {
+							"value": "granule",
+							"label": "中药颗粒剂"
+						}
+					]
+				}
+			]
+		}
+	]
+}

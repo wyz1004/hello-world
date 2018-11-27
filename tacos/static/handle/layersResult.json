@@ -1,0 +1,18 @@
+{
+	"factoryResults":[
+		{"id":1,"layer":"制剂车间","energy":"自来水","value":245},
+		{"id":2,"layer":"提取车间","energy":"自来水","value":500}
+	],
+	"batchResults":[
+		{"id":1,"batchNum":"00003","layer":"提取工艺","energy":"自来水","value":"300"},
+		{"id":2,"batchNum":"00003","layer":"乙醇回收工艺工艺","energy":"自来水","value":"400"},
+		{"id":3,"batchNum":"00003","layer":"浓缩工艺","energy":"自来水","value":"500"},
+		{"id":4,"batchNum":"00003","layer":"醇沉工艺","energy":"自来水","value":"600"},
+		{"id":5,"batchNum":"00003","layer":"层析工艺","energy":"自来水","value":"700"}
+	],
+	"useFactoryResults":["设备1",3434,"设备2",7878,"设备3",8989],
+	"useBatchrResults":["提取工艺",300,"乙醇回收工艺工艺",400,"浓缩工艺",500,"醇沉工艺",600,"层析工艺",700],
+	"useBatchResultAll":["自来水",54,"纯化水",34,"电量",90,"蒸汽量",23],
+	"now":["蒸汽量", 0.092999995, "电量", 144.42221, "自来水", 0, "纯化水", 2240]
+	
+}

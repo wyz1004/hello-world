@@ -8,11 +8,10 @@
 import echarts from "echarts";
 export default ({
 	name:"lines",
-	props:["msg","title","legend","xAxisData","yAxisFormat","seriesDataSeconed","markLine","markPoint"],
+	//props:["title","legend","xAxisData","yAxisFormat","seriesDataSeconed","markLine","markPoint"],
+	props:["optionsUse"],
 	data(){
-		return {
-			
-		}
+		return {}
 	},
 	mounted(){
 		this.drawLines();
@@ -23,18 +22,25 @@ export default ({
 			var self = this;
 	        this.myChartLines = echarts.init(document.getElementById("line"));
 			var option = {
-				color:["#5793f3",'#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
-				title:{
-					text:self.title,
-				},
+				color:["#84a4ee","#5793f3",'#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
+				title:self.optionsUse.title,
 				legend:{
-					data:self.legend,
+					data:self.optionsUse.legend,
 				},
+				toolbox: {
+			        show : true,
+			        feature : {
+			            dataView : {show: true, readOnly: false},
+			            restore : {show: true},
+			            saveAsImage : {show: true}
+			        }
+			    },
 			    tooltip:{
 			    	trigger: 'axis',
 			        axisPointer: {
 			            type: 'cross'
-			        },	    	
+			        },	
+			        formatter: self.optionsUse.tooltipFormatter?self.optionsUse.tooltipFormatter:null
 			    },
 			    grid: {
 			        left: '3%',
@@ -52,7 +58,7 @@ export default ({
 			    xAxis : [
 			        {
 			            type : 'category',
-			            data : self.xAxisData,
+			            data : self.optionsUse.xAxisData,
 			            axisTick: {
 			                alignWithLabel: true
 			            }
@@ -63,11 +69,11 @@ export default ({
 			            type : 'value',
 			            min:0,
 			            axisLabel: {
-			                formatter: self.yAxisFormat
+			                formatter: self.optionsUse.yAxisFormat
 			            }
 			        }
 			    ],
-			    series : self.seriesDataSeconed
+			    series : self.optionsUse.seriesDataSeconed
 			};
 		  this.myChartLines.setOption(option);
 		},
@@ -82,6 +88,21 @@ export default ({
 	        this.resizeWorldMapContainer();
 	        this.myChartLines.resize();
 	    }
+	},
+	watch:{
+		optionsUse:{
+			handler(newVal,oldVal){
+				var self =this;
+				if(newVal){
+					self.myChartLines.dispose();//释放上一个实例
+					self.drawLines();//重新初始化一个实例
+				}else{
+					self.myChartLines.dispose();
+					self.drawLines(oldVal);
+				}
+			},
+			deep:true
+		}
 	},
 	beforeDestroy(){
 		var self = this;

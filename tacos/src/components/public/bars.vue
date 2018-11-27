@@ -8,12 +8,13 @@
 	import echarts from "echarts";
 export default ({
 	name:"bars",
-	props:["title","legend","tooltipFormatter","xAxisData","yAxisFormat","seriesDataSeconed"],
+	//props:["title","legend","tooltipFormatter","xAxisData","yAxisFormat","seriesDataSeconed"],
+	props:["optionBars"],
 	data(){
-		return {
-		}
+		return {}
 	},
 	mounted(){
+		//console.log(this.optionBars)
 		this.drawEcahrts();
 		window.addEventListener('resize', this.handleresize);
 	},
@@ -21,21 +22,29 @@ export default ({
 		drawEcahrts(){
 			var self = this;
 			this.echartBars = echarts.init(document.getElementById("bar"));
+			console.log(this.optionBars);
+			
 			var option = {
 			    color:["#5793f3",'#c23531','#2f4554'],
-			    title:{
-					text:self.title,
-				},
+			    title:self.optionBars.title,
 				legend:{
-					data:self.legend,
+					data:self.optionBars.legend,
 	                top: '0',
 				},
+				toolbox: {
+			        show : true,
+			        feature : {
+			            dataView : {show: true, readOnly: false},
+			            restore : {show: true},
+			            saveAsImage : {show: true}
+			        }
+			    },
 			    tooltip:{
 			    	trigger: 'axis',
 			        axisPointer: {
 			            type: 'cross'
 			        },
-	                formatter: self.tooltipFormatter?self.tooltipFormatter:null
+	                formatter: self.optionBars.tooltipFormatter?self.optionBars.tooltipFormatter:null
 			    },
 	            grid: {
 	                left: '5%',
@@ -54,7 +63,7 @@ export default ({
 			    xAxis : [
 			        {
 			            type : 'category',
-			            data : self.xAxisData,
+			            data : self.optionBars.xAxisData,
 			            axisTick: {
 			                alignWithLabel: true
 			            }
@@ -65,11 +74,11 @@ export default ({
 			            type : 'value',
 			            min:0,
 			            axisLabel: {
-			                formatter: self.yAxisFormat
+			                formatter: self.optionBars.yAxisFormat
 			            }
 			        }
 			    ],
-			    series : self.seriesDataSeconed
+			    series : self.optionBars.seriesDataSeconed
 			};
 			this.echartBars.setOption(option);
 		},
@@ -84,6 +93,21 @@ export default ({
 	        this.resizeWorldMapContainer();
 	        this.echartBars.resize();
 	    }
+	},
+	watch:{
+		optionBars:{
+			handler(newVal,oldVal){
+				var self =this;
+				if(newVal){
+					self.echartBars.dispose();//释放上一个实例
+					self.drawEcahrts();//重新初始化一个实例
+				}else{
+					self.echartBars.dispose();
+					self.drawEcahrts(oldVal);
+				}
+			},
+			deep:true
+		}
 	},
 	beforeDestroy(){
 		var self = this;

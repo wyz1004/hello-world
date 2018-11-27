@@ -1,0 +1,69 @@
+{"bar":{	
+	"total":"20%",
+	"time":["6月","7月"],
+	"children":[
+		{
+			"id":"01",
+			"name":"干燥工艺",
+			"data":[78,43]
+		},{
+			"id":"02",
+			"name":"制剂工艺",
+			"data":[56,90]
+		}
+	]
+},
+"energyTable":{
+	"total":"20%",
+	"con":[
+		{
+			"id":"1",
+			"name":"干燥工艺",
+			"energy":"water",
+			"time":"6月",
+			"data":34,
+			"price":332,
+			"percent":"30%"
+		},
+		{
+			"id":"2",
+			"name":"干燥工艺",
+			"energy":"water",
+			"time":"7月",
+			"data":50,
+			"price":400,
+			"percent":"40%"
+		},
+		{
+			"id":"3",
+			"name":"制剂工艺",
+			"energy":"water",
+			"time":"6月",
+			"data":34,
+			"price":332,
+			"percent":"20%"
+		},
+		{
+			"id":"3",
+			"name":"制剂工艺",
+			"energy":"water",
+			"time":"7月",
+			"data":54,
+			"price":400,
+			"percent":"35%"
+		}
+	]
+},
+"batchTable":[
+	{
+		"id":"1",
+		"name":"制剂车间",
+		"data":56
+	},{
+		"id":"2",
+		"name":"提取车间",
+		"data":78
+	}
+]
+
+}

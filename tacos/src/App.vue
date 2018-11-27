@@ -22,14 +22,14 @@
       background-color="#2a2f43"
       text-color="#fff">
       <el-menu-item index="/energyMonitor/water">
-        <i class="el-icon-setting"></i>
+        <i class="el-icon-phone-outline"></i>
         <span slot="title">能源监控</span>
       </el-menu-item>
       <el-menu-item index="/forecast">
-        <i class="el-icon-setting"></i>
+        <i class="el-icon-edit"></i>
         <span slot="title">能源预测</span>
       </el-menu-item>
-      <el-submenu index="/1">
+      <el-submenu index="/1" hidden>
         <template slot="title">
           <i class="el-icon-location"></i>
           <span>导航一</span>
@@ -40,38 +40,50 @@
           <el-menu-item index="/form">form trying</el-menu-item>
         <!--</el-menu-item-group>
         <el-menu-item-group title="分组2">-->
-          <el-menu-item index="/1-3">选项3</el-menu-item>
+          <el-menu-item index="/trytable">表格组件</el-menu-item>
         <!--</el-menu-item-group>-->
         <el-submenu index="/1-4">
           <template slot="title">选项4</template>
-          <el-menu-item index="/1-4-1">选项1</el-menu-item>
+          <el-menu-item index="/deviceManage">设备管理</el-menu-item>
         </el-submenu>
       </el-submenu>
       <el-submenu index="/2">
       <template slot="title">
         <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
+        <span slot="title">能源优化</span>
       </template>
-      	<el-menu-item index="/2-1">选项1</el-menu-item>
-        <el-menu-item index="/2-2">选项2</el-menu-item>
+      	<el-menu-item index="/optimization" class="second">能源优化</el-menu-item>
+        <el-menu-item index="/tryDialog" class="second">tryDialog</el-menu-item>
         <!--</el-menu-item-group>
         <el-menu-item-group title="分组2">-->
-        <el-menu-item index="/2-3">选项3</el-menu-item>
+        <el-menu-item index="/2-3" class="second">选项3</el-menu-item>
       </el-submenu>
-      <el-submenu index="/3">
+      <el-submenu index="/3" hidden>
       <template slot="title">
         <i class="el-icon-document"></i>
         <span slot="title">导航三</span>
       </template>
-        <el-menu-item index="/3-1">选项1</el-menu-item>
+        <el-menu-item index="/trypie">引入饼状图组件</el-menu-item>
         <el-menu-item index="/3-2">选项2</el-menu-item>
         <!--</el-menu-item-group>
         <el-menu-item-group title="分组2">-->
         <el-menu-item index="/3-3">选项3</el-menu-item>
       </el-submenu>
+      <el-menu-item index="/energySearch">
+        <i class="el-icon-search"></i>
+        <span slot="title">能源查询</span>
+      </el-menu-item>
+      <el-menu-item index="/reportManage">
+        <i class="el-icon-success"></i>
+        <span slot="title">列表管理</span>
+      </el-menu-item>
       <el-menu-item index="/">
-        <i class="el-icon-setting"></i>
+        <i class="el-icon-view"></i>
         <span slot="title">能源分析</span>
+      </el-menu-item>
+      <el-menu-item index="/deviceManage">
+        <i class="el-icon-setting"></i>
+        <span slot="title">设备管理</span>
       </el-menu-item>
     </el-menu>
 		  </el-aside>
@@ -137,6 +149,7 @@ export default {
   margin-top: 60px;
 }*/
 *{margin:0;padding:0;}
+li{list-style: none;}
 html,body{
 	width: 100%;height: 100%;
 	#app{
@@ -155,9 +168,15 @@ html,body{
 		}
 	}
 }
+
+li.second{
+	padding-left: 60px!important;
+}
 ul.el-menu.el-menu-vertical-demo{	
 	/*一级菜单*/
 	li.el-menu-item{
+		height:40px;
+			line-height:40px;
 		i{color: white;}
 		span{}
 	}
@@ -168,6 +187,7 @@ ul.el-menu.el-menu-vertical-demo{
 	}
 	li.is-active{
 		background-color: rgb(77, 82, 105)!important;
+		/*border-right: 2px solid red;*/
 		color:white;
 		i{}
 	}
@@ -181,6 +201,8 @@ ul.el-menu.el-menu-vertical-demo{
 	li.el-submenu{
 		/*二级菜单的标题栏*/
 		div.el-submenu__title{
+			height:40px;
+			line-height:40px;
 			i{color: white;}
 			span{}
 		}
@@ -194,6 +216,8 @@ ul.el-menu.el-menu-vertical-demo{
 			li.el-menu-item{
 				min-width: 100%;/*为了解决，子菜单中右边凸出一块，的样式*/
 				background: rgb(30,33,45)!important;
+				height:40px;
+				line-height:40px;
 			}
 			li.is-active{
 				background-color: rgb(77, 82, 105)!important;
@@ -233,7 +257,10 @@ ul.el-menu.el-menu-vertical-demo{
 		
 	}
 }
-	
+
+.main{
+	padding: 10px!important;
+}
 
 
 body{

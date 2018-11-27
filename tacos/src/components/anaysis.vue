@@ -1,14 +1,15 @@
 <template>
 	<div class="anaysis">
 		<div v-if="seen" class="had">
-		<Bars 
+		<!--<Bars 
 			v-bind:title="title"
 			v-bind:legend="legend"
 			v-bind:tooltipFormatter="tooltipFormatter"
 			v-bind:xAxisData="xAxisData"
 			v-bind:yAxisFormat="yAxisFormat"
 			v-bind:seriesDataSeconed="seriesDataSeconed"
-		></Bars>
+		></Bars>-->
+		<Bars :optionBars="optionBars"></Bars>
 		</div>
 	</div>
 </template>
@@ -21,12 +22,17 @@ export default ({
 	name:"anaysis",
 	data(){
 		return {
-			title:"能源分析",
-			legend:["蒸气用量","耗电量","耗水量"],
-			tooltipFormatter:'{b} 年<br />{a0} : {c0} %<br />{a1} : {c1} %<br />{a2} : {c2} %<br />',
-			xAxisData:null,
-			yAxisFormat:'{value} ％',
-			seriesDataSeconed:null,
+			optionBars:{
+				title:{
+					text:"能源分析",
+					left:"left",
+				},
+				legend:["蒸气用量","耗电量","耗水量"],
+				tooltipFormatter:'{b} 年<br />{a0} : {c0} %<br />{a1} : {c1} %<br />{a2} : {c2} %<br />',
+				yAxisFormat:'{value} ％',
+				xAxisData:[],
+				seriesDataSeconed:[]
+			},
 			requestDatas:null,
 			seen:false,
 		}
@@ -48,10 +54,19 @@ export default ({
 		handleDatas(data){
 			var self = this;
 			//console.log(data);
+			/*
+			 title:"能源分析",
+			legend:["蒸气用量","耗电量","耗水量"],
+			tooltipFormatter:'{b} 年<br />{a0} : {c0} %<br />{a1} : {c1} %<br />{a2} : {c2} %<br />',
+			xAxisData:null,
+			yAxisFormat:'{value} ％',
+			seriesDataSeconed:null,
+			 * */
+			
 			self.requestDatas = data;
-			self.xAxisData = data.time;
+			//self.xAxisData = data.time;
 			var seriesDataSeconed = [{
-		        	name:self.legend[0],
+		        	name:self.optionBars.legend[0],
 		            type:'bar',
 		            data:data.qi,
 					itemStyle: {//图形样式
@@ -61,7 +76,7 @@ export default ({
 						},
 					},
 		        },{
-		        	name:self.legend[1],
+		        	name:self.optionBars.legend[1],
 		            type:'bar',
 		            data:data.shui,
 					itemStyle: {//图形样式
@@ -71,7 +86,7 @@ export default ({
 						},
 					},
 		        },{
-					name:self.legend[2],
+					name:self.optionBars.legend[2],
 		            type:'bar',
 		            data:data.dian,
 					itemStyle: {//图形样式
@@ -81,7 +96,18 @@ export default ({
 						},
 					},
 				}];
-			self.seriesDataSeconed = seriesDataSeconed;
+			//self.seriesDataSeconed = seriesDataSeconed;
+			self.optionBars={
+				title:{
+					text:"能源分析",
+					left:"left",
+				},
+				legend:["蒸气用量","耗电量","耗水量"],
+				tooltipFormatter:'{b} 年<br />{a0} : {c0} %<br />{a1} : {c1} %<br />{a2} : {c2} %<br />',
+				yAxisFormat:'{value} ％',
+				xAxisData:data.time,
+				seriesDataSeconed:seriesDataSeconed
+			}
 			self.seen = true;
 		},
 	},
@@ -91,8 +117,8 @@ export default ({
 
 <style lang="scss" scoped>
 div.anaysis{
-	width: 100%;
-	height: 100%;
+	width: calc(100% - 40px);
+	height: calc(100% - 40px);
 	padding:20px;
 	background: white;
 }

@@ -5,7 +5,7 @@
 		  <el-menu-item index="water">水蒸气监控</el-menu-item>
 		  <el-menu-item index="gas">燃气监控与预警</el-menu-item>
 		  <el-menu-item index="elec">电量监控</el-menu-item>
-		  <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">百度一下</a></el-menu-item>
+		  <el-menu-item index="tryMonitor">试一试</el-menu-item>
 		</el-menu>
 		</div>
 		<div class="monitor_content">
@@ -17,6 +17,8 @@
 <script>
 import Water from "@/components/energyMonitor/water";
 import Gas from "@/components/energyMonitor/gas";
+import Elec from "@/components/energyMonitor/elec";
+import TryMonitor from "@/components/energyMonitor/tryMonitor";
 export default({
 	name:"EnergyMonitor",
 	data() {
@@ -46,6 +48,12 @@ export default({
 		  }else if(key == "gas"){
 		  	this.$router.push({path:"gas"}) 
 		  	this._data.activeIndex = "gas";
+		  }else if(key === "elec"){
+		  	this.$router.push({path:"elec"});
+		  	this._data.activeIndex = "elec";
+		  }else if(key === "tryMonitor"){
+		  	this.$router.push({path:"tryMonitor"});
+		  	this._data.activeIndex = "tryMonitor";
 		  }
       },
       //改变默认选中menu的状态。
@@ -55,12 +63,18 @@ export default({
    			this.activeIndex = "gas";
    		}else if(pathCon == "/energyMonitor/water"){
    			this.activeIndex = "water";
+   		}else if(pathCon == "/energyMonitot/elec"){
+   			this.activeIndex = "elec";
+   		}else if(pathCon == "/energyMonitot/tryMonitor"){
+   			this.activeIndex = "tryMonitor";
    		}
       }
     },
     components:{
     	Water,
-    	Gas
+    	Gas,
+    	Elec,
+    	TryMonitor
     }
 })
 </script>
@@ -69,9 +83,16 @@ export default({
 	div.energyMonitor{
 		height: 100%;
 	}
+	div.monitor_title{
+		height: 48px;
+		ul li{
+			height: 48px!important;
+			line-height: 48px!important;
+		}
+	}
 	div.monitor_content{
-		height: calc(100% - 71px);
-		margin-top:10px;
+		height: calc(100% - 61px);
+		/*margin-top:10px;*/
 		background: white;
 	}
 </style>

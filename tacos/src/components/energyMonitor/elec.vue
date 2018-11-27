@@ -1,5 +1,5 @@
 <template>
-	<div class="water">
+	<div class="elec">
 		<div class="monitors" id="barChart2"></div>
 	</div>
 </template>
@@ -8,7 +8,7 @@
 	import axios from "axios";
 	import echarts from "echarts";
 	export default({
-		name:"Water",
+		name:"elec",
 		data:function(){
 			return {
 				seriesDataSeconedThird:[],
@@ -109,7 +109,7 @@
 				this.myChart = echarts.init(barChart2);
 				var option = {
 					 title: {
-				        text: "耗水量监控",
+				        text: "耗电量监控",
 				        left:"center",
 				        show:false,
 				    },
@@ -156,9 +156,9 @@
 				        {
 				            type: 'value',
 				            scale: true,
-				            name: "耗水量",
+				            name: "耗电量",
 				            axisLabel: {
-				                formatter: "{value} m³"
+				                formatter: "{value} °"
 				            },
 				            axisLine:{//y轴的颜色
 		                        lineStyle:{
@@ -205,7 +205,7 @@
 			},
 			resizeWorldMapContainer(){
 		        var barChart= document.getElementById('barChart2');
-		        var barChartWrapper = document.getElementsByClassName('water')[0];
+		        var barChartWrapper = document.getElementsByClassName('elec')[0];
 		        var widthWrapper = window.getComputedStyle(barChartWrapper);
 		        // barChart.css("width", width+"px");
 		        barChart.style.width = widthWrapper +"px";
@@ -232,7 +232,7 @@
 </script>
 
 <style lang="scss" scoped>
-	div.water{
+	div.elec{
 		width: calc(100% - 40px);
 		height: calc(100% - 40px);
 		padding:20px;

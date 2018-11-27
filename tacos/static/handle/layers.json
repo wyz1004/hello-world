@@ -1,0 +1,141 @@
+{
+	"layersFactory": [
+		{
+			"id": 1,
+			"enterprise": "天中医",
+			"workshop": "提取车间",
+			"process": "提取工艺",
+			"device": "多功能提取罐"
+		}, {
+			"id": 2,
+			"enterprise": "天中医",
+			"workshop": "提取车间",
+			"process": "提取工艺",
+			"device": "提取罐"
+		}, {
+			"id": 3,
+			"enterprise": "天中医",
+			"workshop": "提取车间",
+			"process": "浓缩工艺",
+			"device": "浓缩罐"
+		}, {
+			"id": 4,
+			"enterprise": "天中医",
+			"workshop": "制剂车间",
+			"process": "制剂工艺",
+			"device": "片剂"
+		}, {
+			"id": 5,
+			"enterprise": "天中医",
+			"workshop": "制剂车间",
+			"process": "制剂工艺",
+			"device": "丸剂"
+		}, {
+			"id": 6,
+			"enterprise": "天中医",
+			"workshop": "制剂车间",
+			"process": "制剂工艺",
+			"device": "胶囊剂"
+		}, {
+			"id": 7,
+			"enterprise": "天中医",
+			"workshop": "制剂车间",
+			"process": "干燥工艺",
+			"device": "带式干燥"
+		}, {
+			"id": 8,
+			"enterprise": "天中医",
+			"workshop": "制剂车间",
+			"process": "干燥工艺",
+			"device": "喷雾干燥"
+		}, {
+			"id": 9,
+			"enterprise": "天中医",
+			"workshop": "提取车间",
+			"process": "醇沉工艺",
+			"device": "醇沉罐"
+		}, {
+			"id": 10,
+			"enterprise": "天中医",
+			"workshop": "提取车间",
+			"process": "醇沉工艺",
+			"device": "上清液储罐"
+		}, {
+			"id": 11,
+			"enterprise": "天中医",
+			"workshop": "提取车间",
+			"process": "层析工艺",
+			"device": "层析液储罐"
+		}, {
+			"id": 12,
+			"enterprise": "天中医",
+			"workshop": "提取车间",
+			"process": "乙醇回收工艺",
+			"device": "低醇储罐"
+		}, {
+			"id": 13,
+			"enterprise": "天中医",
+			"workshop": "提取车间",
+			"process": "乙醇回收工艺",
+			"device": "乙醇精馏塔"
+		}, {
+			"id": 14,
+			"enterprise": "天中医",
+			"workshop": "提取车间",
+			"process": "浓缩工艺",
+			"device": "单效蒸发器"
+		}
+	],
+	"layersDrug":[
+		{
+			"id": 1,
+			"medicine":"药品名称1",
+			"batch":"00001"
+		},{
+			"id": 2,
+			"medicine":"药品名称1",
+			"batch":"00002"
+		},{
+			"id": 3,
+			"medicine":"药品名称1",
+			"batch":"00003"
+		},{
+			"id": 4,
+			"medicine":"药品名称2",
+			"batch":"00001"
+		},{
+			"id": 5,
+			"medicine":"药品名称2",
+			"batch":"00003"
+		},{
+			"id": 6,
+			"medicine":"药品名称3",
+			"batch":"00004"
+		},{
+			"id": 7,
+			"medicine":"药品名称2",
+			"batch":"00004"
+		},{
+			"id": 8,
+			"medicine":"药品名称4",
+			"batch":"00002"
+		},{
+			"id": 8,
+			"medicine":"药品名称5",
+			"batch":"00002"
+		},{
+			"id": 10,
+			"medicine":"药品名称5",
+			"batch":"00007"
+		},{
+			"id": 11,
+			"medicine":"药品名称5",
+			"batch":"00001"
+		},{
+			"id": 12,
+			"medicine":"药品名称5",
+			"batch":"00003"
+		}
+		
+	]
+}
