@@ -439,6 +439,7 @@ var actions={
 			var energyType = form.energyType;
 			var medicine = form.search[0];
 			var layer = form.layer;
+			//console.log(energyType,layer);
 			var str = "http://10.110.180.50:8020/TZYEnergy/batch/getBatch.do?energy="+energyType+"&ziduan="+layer+"&batch="+batch+"&medicine="+medicine;
 			//axios.get(str).then(res=>{
 			axios.get("/static/handle/layersResult.json").then(res=>{
