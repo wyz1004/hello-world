@@ -47,7 +47,8 @@ exports.cssLoaders = function (options) {
     if (options.extract) {
       return ExtractTextPlugin.extract({
         use: loaders,
-        fallback: 'vue-style-loader'
+        fallback: 'vue-style-loader',
+        //publicPath:"../../"//2018/12/3添加，解决json数据找不到路径的问题
       })
     } else {
       return ['vue-style-loader'].concat(loaders)

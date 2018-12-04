@@ -22,7 +22,7 @@ export default ({
 		drawEcahrts(){
 			var self = this;
 			this.echartBars = echarts.init(document.getElementById("bar"));
-			console.log(this.optionBars);
+			//console.log(this.optionBars);
 			
 			var option = {
 			    color:["#5793f3",'#c23531','#2f4554'],

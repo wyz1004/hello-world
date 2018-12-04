@@ -44,7 +44,7 @@ export default ({
 		handleRequestDatas(){
 			//从后台中获取数据
 			var self = this;
-			axios.get("/static/mockData/anaysis.json").then(res=>{
+			axios.get("./static/mockData/anaysis.json").then(res=>{
 				//console.log(res.data);
 				self.handleDatas(res.data);
 			}).catch(err=>{

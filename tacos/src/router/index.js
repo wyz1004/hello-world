@@ -11,11 +11,15 @@ import Elec from "@/components/energyMonitor/elec";
 import TryMonitor from "@/components/energyMonitor/tryMonitor";
 //import Anaysis from "@/components/anaysis";
 import Forecast from "@/components/forecast";
-import Optimization from "@/components/optimization";
+import Optimization from "@/components/optimization/index";
+import AirSystem from "@/components/optimization/airSystem";
+import GmpPage from "@/components/optimization/gmpPage";
+import EfficiencyReport from "@/components/optimization/efficiencyReport";
 import TryPie from "@/components/day01/tryPie";
 import FormTry from "@/components/reportManagement/form";
 //import Trytable from "@/components/day01/trytable"
 import ReportManage from "@/components/reportManage/index";
+import PreviewReport from "@/components/previewReport";
 import DeviceManage from "@/components/deviceManage/deviceManage";
 import EnergySearch from "@/components/energySearch/energySearch";
 import EnergyResult from "@/components/energyResult";
@@ -67,6 +71,18 @@ export default new Router({
     	name:"Optimization",
     	component:Optimization
     },{
+    	path:"/airSystem",
+    	name:"AirSystem",
+    	component:AirSystem
+    },{
+    	path:"/gmpPage",
+    	name:"GmpPage",
+    	component:GmpPage
+    },{
+    	path:"/efficiencyReport",
+    	name:"EfficiencyReport",
+    	component:EfficiencyReport
+    },{
     	path:"/trypie",
     	name:"TryPie",
     	component:TryPie
@@ -83,6 +99,10 @@ export default new Router({
     	path:"/reportManage",
     	name:"ReportManage",
     	component:ReportManage
+    },{
+    	path:"/previewReport",
+    	name:"PreviewReport",
+    	component:PreviewReport
     },
     {
     	path:"/energySearch",

@@ -13,6 +13,8 @@ import store from './store'
 import "@/assets/css/public.css";
 
 
+
+
 Vue.use(ElementUI);
 Vue.prototype.$echarts = echarts;
 Vue.prototype.$ajax = axios;

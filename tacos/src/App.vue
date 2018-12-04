@@ -56,7 +56,9 @@
         <el-menu-item index="/tryDialog" class="second">tryDialog</el-menu-item>
         <!--</el-menu-item-group>
         <el-menu-item-group title="分组2">-->
-        <el-menu-item index="/2-3" class="second">选项3</el-menu-item>
+        <el-menu-item index="/airSystem" class="second">空调净化系统</el-menu-item>
+        <el-menu-item index="/gmpPage" class="second">新版GMP洁净度等级</el-menu-item>
+        <el-menu-item index="/efficiencyReport" class="second">批次能效报表</el-menu-item>
       </el-submenu>
       <el-submenu index="/3" hidden>
       <template slot="title">
@@ -162,6 +164,9 @@ html,body{
 					/*background: #2a2f43;/*为解决滚动条滚动到最下方时，侧边栏底下（原超出部分）不是白色*/
 					ul.el-menu{
 						height: 100%;
+						li{
+							margin:4px 0!important;
+						}
 					}
 				}
 			}
@@ -213,6 +218,7 @@ ul.el-menu.el-menu-vertical-demo{
 		}
 		/*二级菜单的子菜单*/
 		ul.el-menu.el-menu--inline{
+			background:#1e212d !important;
 			li.el-menu-item{
 				min-width: 100%;/*为了解决，子菜单中右边凸出一块，的样式*/
 				background: rgb(30,33,45)!important;

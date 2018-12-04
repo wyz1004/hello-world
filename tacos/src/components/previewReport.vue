@@ -1,22 +1,19 @@
 <template>
-<div class="optimization">
+<div id="previewReport">
 	{{home}}
 </div>
 </template>
 
 <script>
 export default ({
-	name:"optimization",
+	name:"previewReport",
 	data(){
 		return {
-			home:"这是能源优化页面",
+			home:"这是预览界面"
 		}
 	}
 })
 </script>
 
 <style lang="scss" scoped>
-div.optimization{
-	background: white;
-}
 </style>

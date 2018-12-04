@@ -4,7 +4,7 @@ var state = {
 };
 var mutations = {
 	lists(state,datas){
-		console.log(datas);
+		//console.log(datas);
 		var objType={
 			"饼状图":1,
 			"柱状图":0,
@@ -30,26 +30,31 @@ var mutations = {
                   (d.getDate()); 
                   return date; 
         }
-		datas.forEach(function(data,index,datas){
-			data.key = index +1;
-			data.utilitiesTime = get_Date(data.utilitiesTime);
-			data.utilitiesUpdatetime = get_Date(data.utilitiesUpdatetime);
-			for(var zyn in objZyn){
-				if(data.utilitiesZyn===objZyn[zyn]){
-					data.utilitiesZyn = zyn;
+		if(datas.length){
+			datas.forEach(function(data,index,datas){
+				data.key = index +1;
+				data.utilitiesTime = get_Date(data.utilitiesTime);
+				data.utilitiesUpdatetime = get_Date(data.utilitiesUpdatetime);
+				for(var zyn in objZyn){
+					if(data.utilitiesZyn===objZyn[zyn]){
+						data.utilitiesZyn = zyn;
+					}
 				}
-			}
-			for(var classify in objClassify){
-				if(data.utilitiesClassify===objClassify[classify]){
-					data.utilitiesClassify = classify;
+				for(var classify in objClassify){
+					if(data.utilitiesClassify===objClassify[classify]){
+						data.utilitiesClassify = classify;
+					}
 				}
-			}
-			for(var type in objType){
-				if(data.utilitiesType === objType[type]){
-					data.utilitiesType = type;
+				for(var type in objType){
+					if(data.utilitiesType === objType[type]){
+						data.utilitiesType = type;
+					}
 				}
-			}
-		})
+			})
+		}else{
+			datas = [];
+		}
+		
 		//console.log(datas);
 		return state.lists = datas;
 	}
@@ -65,7 +70,16 @@ var actions = {
 		}).catch(err=>{
 			console.log(err);
 		})
-	}
+	},
+	SearchInput({commit,dispatch},payload){
+		console.log(payload);
+		/*utilitiesName: "fs"	utilitiesType: "2"*/
+		axios.get("http://10.110.180.50:8010/ssm/utilities/selectByWhere.do?utilitiesType="+payload.utilitiesType+"&utilitiesName="+payload.utilitiesName).then((res)=>{
+			commit("lists",res.data);
+		}).catch(err=>{
+			console.log(err);
+		})
+	},
 };
 	
 export default {
