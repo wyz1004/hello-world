@@ -43,17 +43,7 @@
 	    <el-table-column
 	      label="操作" width="180px" fixed="right">
 	      <template slot-scope="scope">
-	      	<el-popover
-			  placement="top"
-			  width="160"
-			  :value="popVisibleArrays[scope.$index]">
-			  <p>确定要删除该项吗？</p>
-			  <div style="text-align: center; margin: 0">
-			    <el-button size="mini" type="text" @click="handlePopCancel(scope.$index)">取消</el-button>
-			    <el-button type="primary" size="mini" @click="handlePopOK(scope.$index)">确定</el-button>
-			  </div>
-			  <el-button slot="reference" @click="handleClickDel(scope.$index,scope.row,scope)" type="text" size="small">删除</el-button>
-			</el-popover>
+	      	<el-button @click="handleClickDel(scope.$index,scope.row,scope)" type="text" size="small">删除</el-button>
 	        <el-button @click="handleClickEdit(scope.$index,scope.row,scope)" type="text" size="small">修改</el-button>
 	        <el-button @click="handleClickPreview(scope.$index,scope.row,scope)" type="text" size="small">预览</el-button>
 	      </template>
@@ -97,8 +87,6 @@ export default({
 			},
 			dialogFormVisible:false,//弹出对话框中的表单
 			editForm:{},//弹出对话框中的数据
-			popVisible:false,
-			popVisibleArrays:[false,false,false,false,false,false,false,false,false,false],
 		}
 	},
 	components:{EditForm},
@@ -114,25 +102,8 @@ export default({
 			this.conData =  this.lists.length ? this.lists.slice(0,10) : null;
 			return this.lists.length;
 		},
-		/*popVisibleArrays(){
-			var datas = this.conData
-			var self = this;
-			var falseArrays = [];
-			datas.forEach(function(data,index,datas){
-				falseArrays.push(false);
-			})
-			console.log(falseArrays);
-			return falseArrays
-		}*/
 	},
-	watch:{
-		popVisibleArrays(newVal,oldVal){
-			if(newVal){
-				console.log(newVal)
-				return newVal;
-			}
-		}
-	},
+	watch:{},
 	methods:{
 		getLists(){
 			this.$store.dispatch("reportManage/lists");
@@ -199,13 +170,14 @@ export default({
 			utilitiesName: "111"
 			utilitiesStarttime: 1534176000000
 			utilitiesTime: "2018-10-15"
+			utilitiesTimeUse:"时间戳"
 			utilitiesType: "折线图"
 			utilitiesUpdate: "111"
 			utilitiesUpdatetime: "2018-10-15"
 			utilitiesZyn: "天"}*/
 			var utilitiesDuringTime = [];
-			utilitiesDuringTime[0] = new Date(utilitiesStarttime);
-			utilitiesDuringTime[1] = new Date(utilitiesEndtime);
+			utilitiesDuringTime[0] = new Date(row.utilitiesStarttime);
+			utilitiesDuringTime[1] = new Date(row.utilitiesEndtime);
 			this.editForm={
 				utilitiesMetris:row.utilitiesMetris,
 				utilitiesType:row.utilitiesType,
@@ -217,24 +189,22 @@ export default({
 				utilitiesDuringTime:utilitiesDuringTime,
 				utilitiesUpdate:row.utilitiesUpdate,
 				utilitiesId:row.utilitiesId,
-				utilitiesTime:row.utilitiesTime
+				utilitiesTime:row.utilitiesTimeUse
 			}
 		},
 		handleClickDel(index,row,datas){
-			console.log(this);
-			this.popVisibleArrays[index] = true;
-			console.log(index,this.popVisibleArrays);
+			var self = this;
+			this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+	          confirmButtonText: '删除',
+	          cancelButtonText: '取消',
+	          type: 'warning'
+	        }).then(() => {
+	        	console.log(index,row);
+	        	self.$store.dispatch("reportManage/listsDel",row.utilitiesId);
+	        }).catch(() => {
+	                   
+	        });
 			
-		},
-		handlePopCancel(index){
-			console.log(this.popVisibleArrays);
-			this.popVisibleArrays[index] = false;
-		},
-		handlePopOK(index){
-			console.log(this.popVisibleArrays);
-			this.popVisibleArrays[index] = false;
-			
-			console.log("删除该项");
 		},
 		handleShow(index){
 			console.log("shwo",index);

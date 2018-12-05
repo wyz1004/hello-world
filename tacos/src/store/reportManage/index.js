@@ -34,6 +34,7 @@ var mutations = {
 			datas.forEach(function(data,index,datas){
 				data.key = index +1;
 				data.utilitiesTime = get_Date(data.utilitiesTime);
+				data.utilitiesTimeUse = data.utilitiesTime;
 				data.utilitiesUpdatetime = get_Date(data.utilitiesUpdatetime);
 				for(var zyn in objZyn){
 					if(data.utilitiesZyn===objZyn[zyn]){
@@ -66,19 +67,29 @@ var actions = {
 		//axios.get("http://10.110.180.50:8010/ssm/utilities/toUtilitiesList.do").then(res=>{
 		axios.get("/static/reportManage/lists.json").then(res=>{
 		//console.log(res.data);
+		console.log(res.data);
 			commit("lists",res.data);
 		}).catch(err=>{
 			console.log(err);
 		})
 	},
 	SearchInput({commit,dispatch},payload){
-		console.log(payload);
 		/*utilitiesName: "fs"	utilitiesType: "2"*/
 		axios.get("http://10.110.180.50:8010/ssm/utilities/selectByWhere.do?utilitiesType="+payload.utilitiesType+"&utilitiesName="+payload.utilitiesName).then((res)=>{
 			commit("lists",res.data);
 		}).catch(err=>{
 			console.log(err);
 		})
+	},
+	listsDel({commit,dispatch},payload){
+		axios.get("http://10.110.180.50:8010/ssm/utilities/delUtilities.do?utilitiesId="+payload).then((res)=>{
+	        if(res.data.success==true){
+	        	console.log("del")
+	        	dispatch("lists");
+	        }
+	      }).catch((err)=>{
+	        console.log(err);
+	      })
 	},
 };
 	

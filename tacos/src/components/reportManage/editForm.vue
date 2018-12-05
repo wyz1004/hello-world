@@ -154,9 +154,46 @@ export default ({
 		        var formateEndTime = new Date(dataUse.utilitiesDuringTime[1]);
 		        var formateEndTime_value=formateEndTime.getFullYear() + '-' + (formateEndTime.getMonth() + 1) + '-' + formateEndTime.getDate()+
 		        " " +"00" + ":" +"00" +":"+"00";
-		        
+		        var utilitiesTime = new Date(dataUse.utilitiesTime);
+		        var utilitiesTime_value=utilitiesTime.getFullYear() + '-' + (utilitiesTime.getMonth() + 1) + '-' + utilitiesTime.getDate()+
+		        " " +"00" + ":" +"00" +":"+"00"; 
 		        if(dataUse.utilitiesId){
 		        	console.log("这是修改页面")
+		        	var objType={
+						"饼状图":1,
+						"柱状图":0,
+						"报表数据":2,
+						"折线图":3
+					}
+					var objClassify={
+						"水气电表":1,
+						"蒸汽表":0,
+						"水量表":2,
+						"电量表":3
+					}
+					var objZyn = {                                                       
+						"年":0,
+						"季度":1,
+						"月":2,
+						"天":3
+					}
+					for(var dataUseIndex in dataUse){
+						for(var zyn in objZyn){
+							if(dataUse[dataUseIndex]===zyn){
+								dataUse[dataUseIndex] = objZyn[zyn];
+							}
+						}
+						for(var classify in objClassify){
+							if(dataUse[dataUseIndex]===classify){
+								dataUse[dataUseIndex] = objClassify[classify];
+							}
+						}
+						for(var type in objType){
+							if(dataUse[dataUseIndex] === type){
+								dataUse[dataUseIndex] = objType[type];
+							}
+						}
+					}
 		        	axios.get("http://10.110.180.50:8010/ssm/utilities/addOrUpdateUtilities.do?utilitiesId="+dataUse.utilitiesId+
 			        "&utilitiesType="+dataUse.utilitiesType+"&utilitiesClassify="+dataUse.utilitiesClassify+
 			        "&utilitiesName="+dataUse.utilitiesName+"&utilitiesHeadline="+dataUse.utilitiesHeadline+
@@ -164,7 +201,7 @@ export default ({
 			        "&utilitiesEndtime="+formateEndTime_value+
 			        "&utilitiesCreator="+dataUse.utilitiesCreator+
 			        "&utilitiesUpdate="+dataUse.utilitiesUpdate+
-			        "&utilitiesTime="+dataUse.utilitiesTime+
+			        "&utilitiesTime="+utilitiesTime_value+
 			        "&utilitiesMetris="+dataUse.utilitiesMetris+"&utilitiesZyn="+dataUse.utilitiesZyn
 			       ).then((res)=>{
 			          if(res.data.success===true){
