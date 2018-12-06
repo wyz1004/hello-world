@@ -111,16 +111,29 @@ export default({
 		handleClickPreview(index,row,all){
 			console.log("预览页面");
 			console.log(index,row,all);
-			this.$router.push({
+			var obj = {
+				"deviceId":row.utilitiesId,
+                "type":row.utilitiesClassify,
+                "picType":row.utilitiesType,
+                "startTime":row.utilitiesStarttime,
+                "endTime":row.utilitiesEndtime,
+                "deviceName":row.utilitiesMetris, 
+                "period":row.utilitiesZyn
+			}
+			//obj = JSON.parse(obj1);
+			
+			/*this.$router.push({
             	name:"PreviewReport",
             	params:{
-            		deviceId:row.utilitiesId,
-                    type:row.utilitiesClassify,
-                    picType:row.utilitiesType,
-                    startTime:row.utilitiesStarttime,
-                    endTime:row.utilitiesEndtime,
-                    deviceName:row.utilitiesMetris, 
-                    period:row.utilitiesZyn
+            		id:{
+            			JSON.stringify(obj);
+            		}
+            	}
+            });*/
+           this.$router.push({
+            	path:"/previewReport",
+            	query:{
+            		id:JSON.stringify(obj)
             	}
             });
 		},
