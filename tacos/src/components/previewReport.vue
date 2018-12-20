@@ -52,12 +52,41 @@ export default ({
 		}
 	},
 	mounted(){
-		console.log(this.$route.params.id); 
+		this.handleGetRequestDatas();
 	},
 	methods:{
 		//返回按钮
 		handleBack(){
 			this.$router.push("/reportManage");
+		},
+		handleGetRequestDatas(){
+			var self = this;
+			console.log(this.$route.query);
+			var urlQuery = this.$route.query;
+			/*deviceId: "29ff55e3-db58-4639-86c5-ef09890eff29"
+			deviceName: "steam_collector002"
+			endTime: 1534521600000
+			period: "天"
+			picType: "折线图"
+			startTime: 1534176000000
+			type: "水气电表"*/
+			var objPeriodTimes={
+		  		"年":"0",
+				"季度":"1",
+				"月":"2",
+				"日":"3",
+				"天":"3",
+		  	};
+			for(var i in objPeriodTimes){
+				if(urlQuery.period === i){
+					urlQuery.period = objPeriodTimes[i];
+				}
+			}
+			if(urlQuery.picType ==="报表数据"){
+				
+			}else{
+				
+			}
 		},
 	},
 	components:{
